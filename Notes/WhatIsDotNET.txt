@@ -1,0 +1,76 @@
+================================================
+  PHASE 1 — What is .NET?
+  .NET Internship Prep — Study Notes
+================================================
+
+-------------------------------------------------
+1. C# vs .NET — The Big Picture
+-------------------------------------------------
+
+C#  = The LANGUAGE. You write code with it.
+.NET = The PLATFORM/TOOLBOX. It gives you ready-made tools.
+
+Simple analogy:
+- C# is your PEN
+- .NET is the NOTEBOOK + RULER + everything else
+
+Without .NET → you handle everything manually (nightmare)
+With .NET    → Microsoft built the hard stuff, you focus on your app logic ✅
+
+-------------------------------------------------
+2. What Can You Build with .NET?
+-------------------------------------------------
+
+Web APIs & Websites  → ASP.NET Core
+Desktop Apps         → WPF / MAUI
+Mobile Apps          → .NET MAUI
+Games                → Unity (uses C#)
+
+🎯 For internships → We focus on ASP.NET Core Web APIs
+
+-------------------------------------------------
+3. How .NET Works (Step by Step)
+-------------------------------------------------
+
+Your C# Code
+     ↓
+  Compiler
+     ↓
+IL Code (Intermediate Language)
+     ↓
+CLR (Common Language Runtime)
+     ↓
+Runs on Your Computer
+
+- Compiler     → translates your code into IL (universal middle language)
+- IL Code      → a middle language, not yet machine code
+- CLR          → takes IL and runs it on YOUR computer
+- Same code runs on Windows, Mac, Linux ✅
+
+-------------------------------------------------
+4. CLR — The Heart of .NET
+-------------------------------------------------
+
+CLR = Common Language Runtime
+
+- Runs your compiled C# code
+- Manages memory automatically
+- This memory management = GARBAGE COLLECTION
+- Without CLR → program cannot run
+
+🎯 INTERVIEW ANSWER:
+"CLR stands for Common Language Runtime. It is the 
+heart of .NET. It takes compiled C# code and runs it 
+on the computer. It also manages memory automatically 
+through a process called Garbage Collection."
+
+-------------------------------------------------
+5. .NET vs .NET Framework (Quick Difference)
+-------------------------------------------------
+
+.NET Framework → Old (2002), Windows only, dying
+.NET (6/7/8)   → New, cross-platform, the future ✅
+
+We are learning .NET 8.
+
+================================================
