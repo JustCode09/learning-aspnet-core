@@ -1,0 +1,25 @@
+================================================
+  PHASE 1.5 — What is a Web API?
+================================================
+
+A Web API is a middleman between frontend and backend.
+One app ASKS (Request) → API ANSWERS (Response)
+
+REAL LIFE ANALOGY:
+Customer  = User/Frontend
+Waiter    = Web API
+Kitchen   = Backend/Database
+
+HTTP METHODS:
+GET     → Read data   ("give me all students")
+POST    → Insert data ("add new student")
+PUT     → Update data ("edit student info")
+DELETE  → Remove data ("delete student")
+
+OUR PROJECT:
+We will build a Student Management Web API
+- GET    /students        → get all students
+- POST   /students        → add a student
+- PUT    /students/{id}   → update a student
+- DELETE /students/{id}   → delete a student
+================================================
