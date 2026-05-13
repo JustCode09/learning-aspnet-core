@@ -1,0 +1,44 @@
+================================================
+  PHASE 2 — Topic 3: Methods
+================================================
+
+WHAT IS A METHOD?
+A block of code that does ONE specific job.
+Write once → use anywhere.
+
+STRUCTURE:
+returnType MethodName(parameters)
+{
+    // code
+}
+
+TYPES:
+------
+1. void - does something, returns nothing
+   void SayHello() { Console.WriteLine("Hi"); }
+
+2. with parameters - accepts input
+   void Greet(string name) { }
+
+3. with return type - gives back a value ⭐
+   int Add(int a, int b) { return a + b; }
+
+RETURN TYPES:
+void   → returns nothing
+int    → returns a whole number
+string → returns text
+bool   → returns true/false
+double → returns decimal number
+
+🎯 WHY METHODS MATTER IN APIs:
+Every API endpoint = a method
+GetAllStudents()     → returns list of students
+AddStudent(name)     → adds a student
+DeleteStudent(id)    → deletes a student
+
+🎯 INTERVIEW TIP:
+"Return type tells us what a method gives back.
+void = returns nothing, just performs an action.
+int/string/bool = returns that type of data."
+
+================================================
