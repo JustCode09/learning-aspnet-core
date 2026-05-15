@@ -1,0 +1,51 @@
+================================================
+  PHASE 2 — Topic 4: Classes & Objects
+================================================
+
+CLASS = Blueprint (not real yet)
+OBJECT = Real instance built from blueprint
+
+STRUCTURE:
+public class Student
+{
+    // Properties (correct .NET way)
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public double GPA { get; set; }
+
+    // Method
+    public void Introduce()
+    {
+        Console.WriteLine($"Hi, I am {Name}");
+    }
+}
+
+CREATING OBJECTS:
+Student student1 = new Student();
+student1.Name = "Ram";
+
+{ get; set; } MEANS:
+get → you can READ the value
+set → you can WRITE the value
+
+CONSTRUCTOR:
+Sets all data in ONE line when creating object
+public Student(string name, int age)
+{
+    Name = name;
+    Age = age;
+}
+// Usage:
+Student s = new Student("Ram", 20);
+
+WHY IT MATTERS IN APIs:
+Every API has a MODEL class like Student
+When API returns data → it returns objects
+
+🎯 INTERVIEW TIP:
+"A class is a blueprint defining properties and methods.
+An object is a real instance created using new keyword.
+Example: Student is a class, new Student() is an object."
+
+================================================
