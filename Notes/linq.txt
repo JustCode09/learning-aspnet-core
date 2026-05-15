@@ -1,0 +1,59 @@
+================================================
+  PHASE 2 — Topic 7: LINQ
+================================================
+
+WHAT IS LINQ?
+Language Integrated Query.
+Filter, find, sort data in ONE clean line.
+Like a search filter on a shopping website.
+
+THE ARROW => (Lambda Expression)
+s => s.GPA > 3.5
+Read as: "for each item, call it s, 
+          check if s.GPA is above 3.5"
+The name (s, x, std) doesn't matter.
+
+MOST IMPORTANT LINQ METHODS:
+
+1. Where() → filter data
+   students.Where(s => s.GPA > 3.5).ToList()
+
+2. FirstOrDefault() → find ONE item ⭐
+   students.FirstOrDefault(s => s.Id == 1)
+   Returns null if nothing found!
+   Used in EVERY API endpoint.
+
+3. OrderBy() → sort A-Z
+   students.OrderBy(s => s.Name).ToList()
+
+4. OrderByDescending() → sort Z-A / highest first
+   students.OrderByDescending(s => s.GPA).ToList()
+
+5. Select() → pick specific fields
+   students.Select(s => s.Name).ToList()
+
+6. Count() → count matching items
+   students.Count(s => s.GPA > 3.5)
+
+IMPORTANT CONCEPTS:
+.ToList()      → converts result to actual List
+               → always use after Where/OrderBy
+.Count         → counts ALL items (no brackets)
+.Count()       → counts MATCHING items (with condition)
+
+IN OUR API:
+// Find by ID
+var student = students.FirstOrDefault(s => s.Id == id);
+
+// Delete
+var toDelete = students.FirstOrDefault(s => s.Id == id);
+students.Remove(toDelete);
+
+// Filter
+var top = students.Where(s => s.GPA > 3.5).ToList();
+
+🎯 INTERVIEW TIP:
+"FirstOrDefault returns the first matching item.
+If nothing matches, it returns null."
+
+================================================

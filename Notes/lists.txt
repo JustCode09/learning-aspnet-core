@@ -1,0 +1,47 @@
+================================================
+  PHASE 2 — Topic 6: Lists & Collections
+================================================
+
+PROBLEM WITH ARRAYS:
+Fixed size — can't add more items once created
+Not suitable for real apps where data changes
+
+LIST — Most Important Collection ⭐
+-----------------------------------
+Dynamic size — grows and shrinks automatically
+List<string> students = new List<string>();
+
+USEFUL METHODS:
+students.Add("Ram")         → add item
+students.Remove("Ram")      → remove item
+students.Count              → how many items
+students.Contains("Ram")    → true/false
+students[0]                 → get by index
+
+LIST OF OBJECTS (what APIs actually use):
+List<Student> students = new List<Student>();
+students.Add(new Student { Id = 1, Name = "Ram" });
+
+DICTIONARY — Key Value Storage
+--------------------------------
+Like a phone book — look up by key, get value
+Dictionary<int, string> students = new Dictionary<int, string>();
+students.Add(1, "Ram");
+Console.WriteLine(students[1]);  // Ram
+
+LIST vs DICTIONARY:
+List       → simple collection, loop through all
+Dictionary → find specific item by key/ID
+
+IN OUR API:
+List<Student> = our fake database
+Add()    → POST request
+Remove() → DELETE request
+foreach  → GET all students
+
+🎯 INTERVIEW TIP:
+"List is preferred over Array in APIs because 
+data grows dynamically. List handles this 
+automatically with Add(), Remove(), Count."
+
+================================================
