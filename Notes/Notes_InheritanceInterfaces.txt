@@ -1,0 +1,60 @@
+================================================
+  PHASE 2 — Topic 5: Inheritance & Interfaces
+================================================
+
+INHERITANCE:
+------------
+Child class inherits from parent using ":"
+Child gets ALL parent properties + methods
+Child can add its OWN properties + methods
+
+public class Person          → Parent/Base class
+public class Student : Person → Child/Derived class
+
+WHY USE IT?
+Write common properties (Name, Age) once in parent.
+All children inherit automatically. No repetition.
+
+IN ASPNET CORE:
+public class StudentController : ControllerBase
+→ StudentController inherits all API powers
+  from ControllerBase (built by Microsoft)
+
+INTERFACE:
+----------
+A CONTRACT — tells a class what methods it MUST have
+Contains NO code — just method names
+Class must implement ALL methods in interface
+
+public interface IStudentService
+{
+    void AddStudent(string name);   // no code
+    void ShowAllStudents();         // no code
+}
+
+public class StudentService : IStudentService
+{
+    // MUST write code for both methods here
+}
+
+RULES:
+- Interface name starts with I (naming convention)
+- No code inside interface, just method signatures
+- Class must implement ALL interface methods
+
+DIFFERENCE:
+Inheritance → gives you parent's actual code
+Interface   → just forces you to write the code
+
+IN REAL .NET PROJECTS:
+IStudentService → interface (the contract)
+StudentService  → class that follows the contract
+This pattern is used in EVERY professional .NET project
+
+🎯 INTERVIEW TIP:
+"Interface is a contract that forces a class to 
+implement specific methods. Inheritance is a 
+parent-child relationship where child gets 
+parent's code automatically."
+
+================================================
