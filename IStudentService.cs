@@ -1,6 +1,6 @@
 ﻿namespace MyFirstWebAPI
 {
-    public interface IStudentServic
+    public interface IStudentService
     {
         void AddStudent(string name);
         void ShowAllStudents();
