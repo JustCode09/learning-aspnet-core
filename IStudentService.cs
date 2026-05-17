@@ -2,7 +2,7 @@
 {
     public interface IStudentService
     {
-        void AddStudent(string name);
+        void AddStudent(string name)
         void ShowAllStudents();
     }
 }
