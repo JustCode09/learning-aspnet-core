@@ -1,0 +1,131 @@
+using Microsoft.AspNetCore.Mvc;
+using MyFirstWebAPI.Models;
+
+namespace MyFirstWebAPI.Controllers
+{
+    // [ApiController] → marks this class as an API controller
+    // [Route] → sets base URL to /api/student
+    [ApiController]
+    [Route("api/[controller]")]
+    public class StudentController : ControllerBase
+    {
+        // =============================================
+        // FAKE DATABASE — will be replaced with real
+        // database later using Entity Framework Core
+        // =============================================
+        private static List<Student> students = new List<Student>
+        {
+            new Student { Id = 1, Name = "Ram",  Age = 20, GPA = 3.9 },
+            new Student { Id = 2, Name = "Sita", Age = 22, GPA = 3.4 },
+            new Student { Id = 3, Name = "Hari", Age = 21, GPA = 3.7 }
+        };
+
+        // =============================================
+        // CREATE — POST /api/student
+        // Adds a new student to the list
+        // Data comes from: Request Body (JSON)
+        // Returns: 201 Created + new student
+        // =============================================
+        [HttpPost]
+        public IActionResult AddStudent(Student student)
+        {
+            // Auto generate ID based on current count
+            student.Id = students.Count + 1;
+
+            // Add new student to our list
+            students.Add(student);
+
+            // Return 201 Created with location of new student
+            return CreatedAtAction(nameof(GetStudent),
+                                   new { id = student.Id },
+                                   student);
+        }
+
+        // =============================================
+        // READ ALL — GET /api/student
+        // Returns all students in the list
+        // Data comes from: nothing (no parameters)
+        // Returns: 200 OK + list of students
+        // =============================================
+        [HttpGet]
+        public IActionResult GetAllStudents()
+        {
+            // Return all students as JSON
+            return Ok(students);
+        }
+
+        // =============================================
+        // READ ONE — GET /api/student/1
+        // Returns one student by ID
+        // Data comes from: URL parameter (id)
+        // Returns: 200 OK + student OR 404 Not Found
+        // =============================================
+        [HttpGet("{id}")]
+        public IActionResult GetStudent(int id)
+        {
+            // Find student using LINQ FirstOrDefault
+            var student = students.FirstOrDefault(s => s.Id == id);
+
+            // If not found return 404
+            if (student == null)
+            {
+                return NotFound($"Student with ID {id} not found");
+            }
+
+            // Return found student with 200 OK
+            return Ok(student);
+        }
+
+        // =============================================
+        // UPDATE — PUT /api/student/1
+        // Updates existing student by ID
+        // Data comes from: URL (id) + Request Body
+        // Returns: 200 OK + updated student
+        // =============================================
+        [HttpPut("{id}")]
+        public IActionResult UpdateStudent(int id, Student updatedStudent)
+        {
+            // Find existing student by ID
+            var student = students.FirstOrDefault(s => s.Id == id);
+
+            // If not found return 404
+            if (student == null)
+            {
+                return NotFound($"Student with ID {id} not found");
+            }
+
+            // Update each field with new values
+            student.Name = updatedStudent.Name;
+            student.Age  = updatedStudent.Age;
+            student.GPA  = updatedStudent.GPA;
+
+            // Return updated student with 200 OK
+            return Ok(student);
+        }
+
+        // =============================================
+        // DELETE — DELETE /api/student/1
+        // Removes a student by ID
+        // Data comes from: URL parameter (id)
+        // Returns: 200 OK + success message
+        // =============================================
+        [HttpDelete("{id}")]
+        public IActionResult DeleteStudent(int id)
+        {
+            // Find student to delete
+            var student = students.FirstOrDefault(s => s.Id == id);
+
+            // If not found return 404
+            if (student == null)
+            {
+                return NotFound($"Student with ID {id} not found");
+            }
+
+            // Remove student from list
+            students.Remove(student);
+
+            // Return success message
+            return Ok($"Student {student.Name} deleted successfully");
+        }
+    }
+}

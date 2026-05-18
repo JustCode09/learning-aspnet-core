@@ -40,5 +40,31 @@ namespace MyFirstWebAPI.Controllers
                                   new { id = student.Id },
                                   student);
         }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateStudent(int id, Student updatedStudent)
+        {
+            var student = students.FirstOrDefault(s => s.Id == id);
+            if (student == null)
+            {
+                return NotFound($"Student with ID {id} not found");
+            }
+            student.Name = updatedStudent.Name;
+            student.Age = updatedStudent.Age;
+            student.GPA = updatedStudent.GPA;
+            return Ok(student);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteStudent(int id)
+        {
+            var student = students.FirstOrDefault(s => s.Id == id);
+            if (student == null)
+            {
+                return NotFound($"Student with ID {id} not found");
+            }
+            students.Remove(student);
+            return Ok($"Student {student.Name} deleted successfully");
+        }
     }
 }
