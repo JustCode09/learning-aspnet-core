@@ -1,0 +1,44 @@
+================================================
+  PHASE 3 — First API Endpoint
+================================================
+
+HOW THE WEB WORKS:
+Request → Process → Response
+That's the entire web.
+
+STATUS CODES:
+200 → OK (success)
+201 → Created (new item added)
+400 → Bad Request (wrong data sent)
+404 → Not Found
+500 → Server Error
+
+PROJECT STRUCTURE:
+Controllers → where API endpoints live
+Models      → where classes like Student live
+Program.cs  → main startup file
+
+CONTROLLER BASICS:
+[ApiController]              → marks class as API
+[Route("api/[controller]")]  → sets the URL
+: ControllerBase             → gives Ok(), NotFound() etc
+[HttpGet]                    → runs on GET request
+IActionResult                → return type for API methods
+return Ok(data)              → 200 success + data
+
+FIRST ENDPOINT:
+[HttpGet]
+public IActionResult GetAllStudents()
+{
+    return Ok(students);  // returns JSON list
+}
+
+URL: GET /api/student
+Returns: all students as JSON
+
+SWAGGER:
+Auto-generated testing UI for your APIs
+You can test all endpoints without frontend
+Real devs use this every day
+
+================================================
