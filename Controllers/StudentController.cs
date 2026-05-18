@@ -7,7 +7,6 @@ namespace MyFirstWebAPI.Controllers
     [Route("api/[controller]")]
     public class StudentController : ControllerBase
     {
-        // Our fake database for now
         private static List<Student> students = new List<Student>
         {
             new Student { Id = 1, Name = "Ram", Age = 20, GPA = 3.9 },
@@ -15,11 +14,23 @@ namespace MyFirstWebAPI.Controllers
             new Student { Id = 3, Name = "Hari", Age = 21, GPA = 3.7 }
         };
 
-        // GET api/students → get all students
         [HttpGet]
         public IActionResult GetAllStudents()
         {
             return Ok(students);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetStudent(int id)
+        {
+            var student = students.FirstOrDefault(s => s.Id == id);
+
+            if (student == null)
+            {
+                return NotFound($"Student with ID {id} not found");
+            }
+
+            return Ok(student);
         }
     }
 }

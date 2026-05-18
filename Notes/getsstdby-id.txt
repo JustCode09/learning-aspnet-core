@@ -1,0 +1,32 @@
+================================================
+GET Student By ID
+================================================
+
+ENDPOINT:
+GET /api/student/1 → get student with ID 1
+
+CODE:
+[HttpGet("{id}")]
+public IActionResult GetStudent(int id)
+{
+    var student = students.FirstOrDefault(s => s.Id == id);
+
+    if (student == null)
+    {
+        return NotFound($"Student with ID {id} not found");
+    }
+
+    return Ok(student);
+}
+
+KEY CONCEPTS:
+{id}              → route parameter (from URL)
+FirstOrDefault()  → find one student using LINQ
+NotFound()        → returns 404
+Ok(student)       → returns 200 + student data
+
+REAL WORLD:
+GET /api/student/1  → found    → 200 OK
+GET /api/student/99 → missing  → 404 Not Found
+
+================================================
