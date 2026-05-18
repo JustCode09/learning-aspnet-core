@@ -24,13 +24,21 @@ namespace MyFirstWebAPI.Controllers
         public IActionResult GetStudent(int id)
         {
             var student = students.FirstOrDefault(s => s.Id == id);
-
             if (student == null)
             {
                 return NotFound($"Student with ID {id} not found");
             }
-
             return Ok(student);
+        }
+
+        [HttpPost]
+        public IActionResult AddStudent(Student student)
+        {
+            student.Id = students.Count + 1;
+            students.Add(student);
+            return CreatedAtAction(nameof(GetStudent),
+                                  new { id = student.Id },
+                                  student);
         }
     }
 }
