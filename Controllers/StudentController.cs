@@ -9,7 +9,7 @@ namespace MyFirstWebAPI.Controllers
     {
         private static List<Student> students = new List<Student>
         {
-            new Student { Id = 1, Name = "Ram", Age = 20, GPA = 3.90 },
+            new Student { Id = 1, Name = "Ram", Age = 20, GPA = 3.92 },
             new Student { Id = 2, Name = "Sita", Age = 22, GPA = 3.4 },
             new Student { Id = 3, Name = "Hari", Age = 21, GPA = 3.7 }
         };
