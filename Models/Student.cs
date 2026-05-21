@@ -1,4 +1,4 @@
-﻿namespace MyFirstWebAPI.Models
+﻿namespace MyFirstWebAPI.Model
 {
     public class Student
     {
