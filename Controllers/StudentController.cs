@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyFirstWebAPI.Models;
+using MyFirstWebAPI.Services;
 
 namespace MyFirstWebAPI.Controllers
 {
@@ -7,64 +8,66 @@ namespace MyFirstWebAPI.Controllers
     [Route("api/[controller]")]
     public class StudentController : ControllerBase
     {
-        private static List<Student> students = new List<Student>
-        {
-            new Student { Id = 1, Name = "Ram", Age = 20, GPA = 3.9 },
-            new Student { Id = 2, Name = "Sita", Age = 22, GPA = 3.4 },
-            new Student { Id = 3, Name = "Hari", Age = 21, GPA = 3.7 }
-        };
+        // Controller doesn't create service itself
+        // .NET gives it automatically
+        private readonly IStudentService _studentService;
 
-        [HttpGet]
-        public IActionResult GetAllStudents()
+        public StudentController(IStudentService studentService)
         {
-            return Ok(students);
+            _studentService = studentService;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetStudent(int id)
-        {
-            var student = students.FirstOrDefault(s => s.Id == id);
-            if (student == null)
-            {
-                return NotFound($"Student with ID {id} not found");
-            }
-            return Ok(student);
-        }
-
+        // CREATE
         [HttpPost]
         public IActionResult AddStudent(Student student)
         {
-            student.Id = students.Count + 1;
-            students.Add(student);
+            var newStudent = _studentService.AddStudent(student);
             return CreatedAtAction(nameof(GetStudent),
-                                  new { id = student.Id },
-                                  student);
+                                   new { id = newStudent.Id },
+                                   newStudent);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult UpdateStudent(int id, Student updatedStudent)
+        // READ ALL
+        [HttpGet]
+        public IActionResult GetAllStudents()
         {
-            var student = students.FirstOrDefault(s => s.Id == id);
+            return Ok(_studentService.GetAllStudents());
+        }
+
+        // READ ONE
+        [HttpGet("{id}")]
+        public IActionResult GetStudent(int id)
+        {
+            var student = _studentService.GetStudentById(id);
             if (student == null)
             {
                 return NotFound($"Student with ID {id} not found");
             }
-            student.Name = updatedStudent.Name;
-            student.Age = updatedStudent.Age;
-            student.GPA = updatedStudent.GPA;
             return Ok(student);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult DeleteStudent(int id)
+        // UPDATE
+        [HttpPut("{id}")]
+        public IActionResult UpdateStudent(int id, Student updatedStudent)
         {
-            var student = students.FirstOrDefault(s => s.Id == id);
+            var student = _studentService.UpdateStudent(id, updatedStudent);
             if (student == null)
             {
                 return NotFound($"Student with ID {id} not found");
             }
-            students.Remove(student);
-            return Ok($"Student {student.Name} deleted successfully");
+            return Ok(student);
+        }
+
+        // DELETE
+        [HttpDelete("{id}")]
+        public IActionResult DeleteStudent(int id)
+        {
+            var result = _studentService.DeleteStudent(id);
+            if (!result)
+            {
+                return NotFound($"Student with ID {id} not found");
+            }
+            return Ok("Student deleted successfully");
         }
     }
 }

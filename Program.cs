@@ -1,5 +1,8 @@
+using MyFirstWebAPI.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
