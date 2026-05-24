@@ -11,7 +11,6 @@ namespace MyFirstWebAPI.Controllers
         // Controller doesn't create service itself
         // .NET gives it automatically
         private readonly IStudentService _studentService;
-
         public StudentController(IStudentService studentService)
         {
             _studentService = studentService;
