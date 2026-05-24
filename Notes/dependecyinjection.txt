@@ -1,0 +1,34 @@
+================================================
+Dependency Injection (DI)
+================================================
+
+SIMPLE MEANING:
+Controller doesn't create services itself.
+.NET automatically creates and delivers 
+the needed service to the controller.
+
+RESTAURANT STORY:
+Waiter    = Controller
+Phone     = Service
+Manager   = .NET
+Injection = Manager giving phone to waiter
+
+3 STEPS:
+1. Program.cs → tell .NET the rule
+   builder.Services.AddScoped<IStudentService, StudentService>();
+
+2. Controller → prepare pocket
+   private readonly IStudentService _studentService;
+
+3. Constructor → .NET delivers service
+   public StudentController(IStudentService studentService)
+   {
+       _studentService = studentService;
+   }
+
+🎯 INTERVIEW ANSWER:
+"Instead of a class creating its own dependencies,
+.NET provides them automatically through 
+the constructor."
+
+================================================
