@@ -11,4 +11,3 @@ namespace MyFirstWebAPI.Services
         bool DeleteStudent(int id);
     }
 }
-id);
