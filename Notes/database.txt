@@ -1,0 +1,165 @@
+================================================
+  Entity Framework Core — Database Notes
+================================================
+
+WHAT IS EF CORE?
+A tool that lets you work with databases
+using C# instead of SQL.
+EF Core translates C# into SQL automatically.
+
+Without EF Core → write SQL queries manually
+With EF Core    → just write C#, EF handles SQL
+
+EXAMPLE:
+SQL:    SELECT * FROM Students
+EF Core: _context.Students.ToList()
+
+SQL:    INSERT INTO Students VALUES(...)
+EF Core: _context.Students.Add(student)
+
+------------------------------------------------
+HOW WE CREATED THE DATABASE — 5 STEPS
+------------------------------------------------
+
+STEP 1 — Install Packages
+Install-Package Microsoft.EntityFrameworkCore -Version 8.0.8
+Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 8.0.8
+Install-Package Microsoft.EntityFrameworkCore.Tools -Version 8.0.8
+
+Why: These are tools that allow us to use
+     EF Core in our project.
+     Like hiring a construction company.
+
+STEP 2 — Create AppDbContext
+Location: Data/AppDbContext.cs
+
+public class AppDbContext : DbContext
+{
+    public AppDbContext(DbContextOptions<AppDbContext> options)
+        : base(options)
+    {
+    }
+
+    public DbSet<Student> Students { get; set; }
+}
+
+Why: AppDbContext is the DOORMAN between
+     our app and database.
+     DbSet<Student> = Students TABLE in database.
+
+STEP 3 — Add Connection String
+Location: appsettings.json
+
+"ConnectionStrings": {
+    "DefaultConnection": 
+    "Server=(localdb)\\mssqllocaldb;
+     Database=StudentDB;
+     Trusted_Connection=True;"
+}
+
+Why: Tells our app WHERE the database is.
+     Like a home address for the database.
+     Database name = StudentDB
+
+STEP 4 — Register In Program.cs
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration
+    .GetConnectionString("DefaultConnection")));
+
+Why: Officially registers database with .NET.
+     Now entire app knows database exists.
+     Like registering a business officially.
+
+STEP 5 — Run Migrations
+Add-Migration InitialCreate  → creates blueprint
+Update-Database              → builds actual table
+
+Why: Actually creates the database and tables.
+Add-Migration   = architect draws blueprint
+Update-Database = workers build the table
+
+------------------------------------------------
+KEY CONCEPTS
+------------------------------------------------
+
+AppDbContext    = doorman to database
+DbSet<Student>  = Students TABLE in database
+_context        = how we use database in code
+SaveChanges()   = permanently saves changes
+Migration       = creates/updates db tables
+
+IMPORTANT RULE:
+EF Core version must match .NET version!
+.NET 8 → EF Core 8
+.NET 9 → EF Core 9
+
+------------------------------------------------
+USING DATABASE IN CODE
+------------------------------------------------
+
+// Door to database
+private readonly AppDbContext _context;
+
+// READ ALL
+_context.Students.ToList()
+
+// READ ONE
+_context.Students.FirstOrDefault(s => s.Id == id)
+
+// ADD
+_context.Students.Add(student)
+_context.SaveChanges()
+
+// UPDATE
+student.Name = updatedStudent.Name
+_context.SaveChanges()
+
+// DELETE
+_context.Students.Remove(student)
+_context.SaveChanges()
+
+WHY SaveChanges()?
+Add/Update/Delete  → change made in memory
+SaveChanges()      → actually saves to database
+Without it         → data never saves 😵
+With it            → data saved permanently ✅
+
+------------------------------------------------
+HOTEL ANALOGY
+------------------------------------------------
+
+Packages          = hired construction company
+AppDbContext      = hired doorman
+Connection String = hotel address
+Program.cs        = registered hotel officially
+Migrations        = actually built the hotel
+_context          = doorman's phone number
+
+------------------------------------------------
+INTERVIEW ANSWERS
+------------------------------------------------
+
+Q: What is EF Core?
+A: Entity Framework Core is a tool that lets us
+work with databases using C# instead of SQL.
+It translates our C# code into SQL automatically.
+
+Q: What is DbContext?
+A: DbContext is the doorman between our app and
+database. All database operations go through it.
+
+Q: What is a Migration?
+A: Migration creates/updates database tables
+based on our C# models.
+Add-Migration creates the blueprint.
+Update-Database builds the actual table.
+
+Q: What is SaveChanges()?
+A: SaveChanges() permanently saves changes
+to the database. Without it, changes are lost.
+
+Q: What is DbSet?
+A: DbSet represents a TABLE in the database.
+DbSet<Student> = Students table.
+
+================================================
