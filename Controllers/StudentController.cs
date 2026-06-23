@@ -4,7 +4,7 @@ using MyFirstWebAPI.Services;
 
 namespace MyFirstWebAPI.Controllers
 {
-    [ApiControllers]
+    [ApiController]
     [Route("api/[controller]")]
     public class StudentController : ControllerBase
     {
