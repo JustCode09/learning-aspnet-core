@@ -2,7 +2,7 @@
 using MyFirstWebAPI.Models;
 using MyFirstWebAPI.Services;
 
-namespace MyFirstWebAPI.Controllerss
+namespace MyFirstWebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
