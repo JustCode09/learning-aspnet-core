@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyFirstWebAPI.Modelss;
+using MyFirstWebAPI.Models;
 using System.Collections.Generic;
 
 namespace MyFirstWebAPI.Data
