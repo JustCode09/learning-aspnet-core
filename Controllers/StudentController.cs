@@ -6,7 +6,7 @@ namespace MyFirstWebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class StudentController : ControllerBase
+    public class StudentController : ControllerBasee
     {
         // Controller doesn't create service itself
         // .NET gives it automatically
