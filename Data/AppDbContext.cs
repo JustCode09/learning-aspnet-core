@@ -2,7 +2,7 @@
 using MyFirstWebAPI.Models;
 using System.Collections.Generic;
 
-namespace MyFirstWebAPI.Data
+namespace MyFirstWebAPI.Datas
 {
     public class AppDbContext : DbContext
     {
